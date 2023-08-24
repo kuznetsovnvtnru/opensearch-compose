@@ -63,8 +63,8 @@ services:
       - "opensearch-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
-      - opensearch-net  
-  
+      - opensearch-net
+      
   opensearch-node3:
     restart: always
     image: opensearchproject/opensearch:2.9.0
