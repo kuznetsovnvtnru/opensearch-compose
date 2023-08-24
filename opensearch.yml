@@ -15,13 +15,13 @@ plugins.security.ssl.transport.pemtrustedcas_filepath: certificates/ca/ca.pem
 plugins.security.ssl.transport.enforce_hostname_verification: false
 
 plugins.security.authcz.admin_dn:
-  - 'CN=ADMIN,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
+  - 'CN=ADMIN,O=TN-Opendistro,DC=tn,DC=ru'
 plugins.security.nodes_dn:
-  - 'CN=opensearch-node0,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node1,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node2,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node3,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node4,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node4,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node5,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
-  - 'CN=opensearch-node6,O=EXAMPLE,L=PARIS,ST=IDF,C=FR'
+  - 'CN=opensearch-node0,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node1,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node2,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node3,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node4,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node4,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node5,O=TN-Opendistro,DC=tn,DC=ru'
+  - 'CN=opensearch-node6,O=TN-Opendistro,DC=tn,DC=ru'
