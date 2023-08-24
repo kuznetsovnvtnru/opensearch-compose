@@ -18,7 +18,6 @@ services:
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-      - network.host="0.0.0.0"
     ulimits: 
       memlock:
         soft: -1
@@ -52,7 +51,6 @@ services:
       - DISABLE_INSTALL_DEMO_CONFIG=true
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-      - network.host="0.0.0.0"
     ulimits: 
       memlock:
         soft: -1
@@ -84,7 +82,6 @@ services:
  #     - "DISABLE_INSTALL_DEMO_CONFIG=true"
  #     - "JAVA_HOME=/usr/share/opensearch/jdk"
  #     - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
- #     - network.host="0.0.0.0"
  #   ulimits: 
  #     memlock:
  #       soft: -1
