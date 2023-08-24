@@ -38,7 +38,7 @@ services:
     restart: always
     image: opensearchproject/opensearch:2.9.0
     environment:
-      - "OPENSEARCH_JAVA_OPTS: -Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node2
       - cluster.name=opensearch-cluster
       - discovery.seed_hosts=opensearch-node1,opensearch-node2,opensearch-node3
