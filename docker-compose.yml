@@ -129,7 +129,8 @@ services:
             max-size: "10m"
     ports:
       - 9200:9200  
-      - 443:443      
+      - 443:443 
+      - 80:80     
     depends_on:
       - opensearch-node1
       - opensearch-node2
