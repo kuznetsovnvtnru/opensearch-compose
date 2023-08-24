@@ -170,3 +170,6 @@ volumes:
   opensearch-data1:
   opensearch-data2:
   opensearch-data3:
+
+networks:
+  opensearch-net:
