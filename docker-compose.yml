@@ -48,7 +48,7 @@ services:
       - plugins.security.ssl.transport.pemcert_filepath=certificates/opensearch-node2/opensearch-node2.pem
       - plugins.security.ssl.http.pemkey_filepath=certificates/opensearch-node2/opensearch-node2.key
       - plugins.security.ssl.http.pemcert_filepath=certificates/opensearch-node2/opensearch-node2.pem
-      - "DISABLE_INSTALL_DEMO_CONFIG=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - network.host="0.0.0.0"
