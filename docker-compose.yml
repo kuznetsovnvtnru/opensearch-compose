@@ -63,9 +63,6 @@ services:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "opensearch-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
-    ports:
-      - 9200:9200
-      - 9600:9600 # required for Performance Analyzer  
     networks:
       - opensearch-net  
   
@@ -97,9 +94,6 @@ services:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "opensearch-data3:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
-    ports:
-      - 9200:9200
-      - 9600:9600 # required for Performance Analyzer
     networks:
       - opensearch-net   
   
@@ -114,6 +108,63 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200","https://opensearch-node3:9200"]' # must be a string with no spaces when specified as an environment variable
       DISABLE_INSTALL_DEMO_CONFIG: "true"
+  
+  os-proxy:
+    build: 
+        context: ./proxy/
+        dockerfile: "Dockerfile"
+    container_name: os-proxy
+    volumes:
+      - ./proxy/config/nginx.os-proxy.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - opensearch-net
+    stop_grace_period: 10s
+    logging:
+        driver: "json-file"
+        options:
+            max-file: "5"
+            max-size: "10m"
+    depends_on:
+      - opensearch-node1
+      - opensearch-node2
+      - opensearch-node3
+    restart: on-failure
+
+  logstash:
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    container_name: logstash
+    volumes:      
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - 5000:5044
+    environment:
+      LS_JAVA_OPTS: "-Xmx1g -Xms1g"      
+    networks:
+      - opensearch-net
+    depends_on:
+      - os-proxy  
+      
+  curator:
+    build:
+      context: ./curator
+    container_name: curator
+    volumes:
+      - ./curator/config:/config
+    environment:
+      UNIT: days
+      UNIT_COUNT: 15
+    mem_limit: 256m
+    memswap_limit: 0
+    restart: on-failure
+    logging:
+        driver: "json-file"
+        options:
+            max-file: "5"
+            max-size: "10m"
+    networks:
+      - opensearch-net
+    depends_on:
+      - os-proxy  
 
 volumes:
   opensearch-data1:
