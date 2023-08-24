@@ -1,4 +1,4 @@
-version: '3'
+﻿version: "3"
 
 services:
 
@@ -30,7 +30,6 @@ services:
       - "opensearch-data1:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     ports:
-      - 9200:9200
       - 9600:9600 # required for Performance Analyzer
     networks:
       - opensearch-net 
@@ -124,6 +123,9 @@ services:
         options:
             max-file: "5"
             max-size: "10m"
+    ports:
+      - 9200:9200  
+      - 443:443      
     depends_on:
       - opensearch-node1
       - opensearch-node2
