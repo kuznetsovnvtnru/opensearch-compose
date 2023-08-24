@@ -46,10 +46,7 @@ function setupSecurityPlugin {
             echo "Enabling OpenSearch Security Plugin"
             
             chmod +x /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh
-            exec "/usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ \
-            -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem \
-            -cert /usr/share/opensearch/config/certificates/ca/admin.pem \
-            -key /usr/share/opensearch/config/certificates/ca/admin.key"
+            exec "/usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem -key /usr/share/opensearch/config/certificates/ca/admin.key"
 
         fi
     else
