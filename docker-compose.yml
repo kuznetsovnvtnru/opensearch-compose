@@ -3,12 +3,9 @@
 services:
 
   opensearch-node1:
-    build: 
-        context: ./proxy/
-        dockerfile: "Dockerfile"
+    image: opensearchproject/opensearch:2.9.0
     container_name: opensearch-node1
     restart: always
-    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node1
@@ -40,9 +37,9 @@ services:
       - opensearch-net 
   
   opensearch-node2:
+    image: opensearchproject/opensearch:2.9.0  
     container_name: opensearch-node2
     restart: always
-    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node2
