@@ -1,5 +1,4 @@
 FROM opensearchproject/opensearch:2.9.0
-USER root
 WORKDIR /usr/share/opensearch
 COPY --chmod=755 ./start_secureadmin.sh /usr/share/opensearch/start_secureadmin.sh
 
