@@ -63,7 +63,7 @@ services:
         hard: 65536
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
-      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
+#      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
       - "opensearch-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
