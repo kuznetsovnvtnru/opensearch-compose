@@ -57,7 +57,7 @@ function StartSecurityPlugin {
 
     sleep 1m
     chmod +x /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh
-            /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key
+    /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key
 
 }
 
@@ -123,7 +123,7 @@ fi
 if [ "$1" = "opensearch" ]; then
     # If the first argument is opensearch, then run the setup script.
     runOpensearch "$@" &
-     StartSecurityPlugin &
+    StartSecurityPlugin &
 else
     # Otherwise, just exec the command.
     exec "$@"
