@@ -4,10 +4,11 @@ services:
 
   opensearch-node1:
     build: 
-        context: ./opensearch/
+        context: ./proxy/
         dockerfile: "Dockerfile"
     container_name: opensearch-node1
     restart: always
+    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node1
@@ -20,6 +21,7 @@ services:
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+    command: /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key  
     ulimits: 
       memlock:
         soft: -1
@@ -29,6 +31,7 @@ services:
         hard: 65536  
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+#      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
       - "opensearch-data1:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     ports:
@@ -37,11 +40,9 @@ services:
       - opensearch-net 
   
   opensearch-node2:
-    build: 
-        context: ./opensearch/
-        dockerfile: "Dockerfile"
     container_name: opensearch-node2
     restart: always
+    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node2
@@ -55,6 +56,7 @@ services:
       - DISABLE_INSTALL_DEMO_CONFIG=true
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+    command: /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key    
     ulimits: 
       memlock:
         soft: -1
@@ -64,6 +66,7 @@ services:
         hard: 65536
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
       - "opensearch-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
