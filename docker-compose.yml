@@ -18,7 +18,9 @@ services:
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-    command: /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key  
+    entrypoint: 
+      - /usr/share/opensearch/opensearch-docker-entrypoint.sh
+      - /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key  
     ulimits: 
       memlock:
         soft: -1
@@ -53,7 +55,9 @@ services:
       - DISABLE_INSTALL_DEMO_CONFIG=true
       - "JAVA_HOME=/usr/share/opensearch/jdk"
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-    command: /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key    
+    entrypoint: 
+      - /usr/share/opensearch/opensearch-docker-entrypoint.sh
+      - /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key  
     ulimits: 
       memlock:
         soft: -1
