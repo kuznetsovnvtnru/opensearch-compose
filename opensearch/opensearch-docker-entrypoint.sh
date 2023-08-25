@@ -45,13 +45,20 @@ function setupSecurityPlugin {
         else
             echo "Enabling OpenSearch Security Plugin"
             
-            chmod +x /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh
-            /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key
+            
 
         fi
     else
         echo "OpenSearch Security Plugin does not exist, disable by default"
     fi
+}
+
+function StartSecurityPlugin {
+
+    sleep 1m
+    chmod +x /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh
+            /usr/share/opensearch/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/opensearch/config/opensearch-security/ -icl -nhnv -cacert /usr/share/opensearch/config/certificates/ca/ca.pem -cert /usr/share/opensearch/config/certificates/ca/admin.pem  -key /usr/share/opensearch/config/certificates/ca/admin.key
+
 }
 
 # Performance Analyzer Plugin
@@ -102,7 +109,8 @@ function runOpensearch {
     setupPerformanceAnalyzerPlugin
 
     # Start opensearch
-    "$@" "${opensearch_opts[@]}"
+    "$@" "${opensearch_opts[@]}" &
+   
 
 }
 
@@ -114,7 +122,8 @@ fi
 
 if [ "$1" = "opensearch" ]; then
     # If the first argument is opensearch, then run the setup script.
-    runOpensearch "$@"
+    runOpensearch "$@" &
+     StartSecurityPlugin &
 else
     # Otherwise, just exec the command.
     exec "$@"
