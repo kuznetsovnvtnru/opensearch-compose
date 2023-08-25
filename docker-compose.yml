@@ -3,9 +3,11 @@
 services:
 
   opensearch-node1:
+    build: 
+        context: ./opensearch/
+        dockerfile: "Dockerfile"
     container_name: opensearch-node1
     restart: always
-    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node1
@@ -27,7 +29,6 @@ services:
         hard: 65536  
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
-      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
       - "opensearch-data1:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     ports:
@@ -36,9 +37,11 @@ services:
       - opensearch-net 
   
   opensearch-node2:
+    build: 
+        context: ./opensearch/
+        dockerfile: "Dockerfile"
     container_name: opensearch-node2
     restart: always
-    image: opensearchproject/opensearch:2.9.0
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
       - node.name=opensearch-node2
@@ -61,7 +64,6 @@ services:
         hard: 65536
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
-      - "./opensearch-docker-entrypoint.sh:/usr/share/opensearch/opensearch-docker-entrypoint.sh"
       - "opensearch-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
